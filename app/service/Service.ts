@@ -17,7 +17,7 @@ class EggService extends Service {
     return result;
   }
 
-  async getById(id: number) {
+  async getById(id: string) {
     const result = await this.ctx.model.Service.findOne({ _id: id });
     return result;
   }
