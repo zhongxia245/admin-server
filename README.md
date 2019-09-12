@@ -2,23 +2,37 @@
 
 [Hacker News](https://news.ycombinator.com/) showcase using typescript && egg
 
-## QuickStart
+## 快速开始
 
-### Development
+### 如何开发
 
 ```bash
-$ npm i
-$ npm run dev
-$ open http://localhost:7001/
+npm i
+npm run dev
+# open http://localhost:7001/
 ```
 
-Don't tsc compile at development mode, if you had run `tsc` then you need to `npm run clean` before `npm run dev`.
+不要再开发环境执行 tsc 编译，如果已经执行了，你需要执行 `npm run clean` 在 `npm run dev` 之前。
 
-### Deploy
+### 部署
 
 ```bash
-$ npm run tsc
-$ npm start
+npm run tsc
+npm start
+```
+
+#### 在自己服务器上
+
+```bash
+# 第一次部署
+git clone https://github.com/zhongxia245/admin-server.git
+cd admin-server
+npm i
+npm run tsc
+pm2 start pm2.json
+
+# 更新代码
+sh deploy.sh
 ```
 
 ### Npm Scripts
@@ -27,7 +41,7 @@ $ npm start
 - Use `npm test` to run unit test
 - se `npm run clean` to clean compiled js at development mode once
 
-### Requirement
+### 环境要求
 
 - Node.js 8.x
 - Typescript 2.8+
