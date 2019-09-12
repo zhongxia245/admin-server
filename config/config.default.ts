@@ -10,11 +10,6 @@ export default (appInfo: EggAppInfo) => {
   // add your egg config in here
   config.middleware = [];
 
-  // add your special config in here
-  const bizConfig = {
-    sourceUrl: `https://github.com/eggjs/examples/tree/master/${appInfo.name}`,
-  };
-
   /**
    * @see http://mongodb.github.io/node-mongodb-native/2.2/api/Db.html#createCollection
    */
@@ -30,6 +25,11 @@ export default (appInfo: EggAppInfo) => {
     csrf: {
       enable: false,
     },
+  };
+
+  // add your special config in here
+  const bizConfig = {
+    sourceUrl: `https://github.com/eggjs/examples/tree/master/${appInfo.name}`,
   };
 
   // the return config will combines to EggAppConfig

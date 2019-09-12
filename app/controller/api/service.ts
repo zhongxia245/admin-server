@@ -3,7 +3,7 @@ import { Controller } from 'egg';
 export default class EggController extends Controller {
   public async index() {
     const { ctx } = this;
-    const data = await ctx.service.service.get(ctx.queries);
+    const data = await ctx.service.service.get(ctx.query);
     ctx.body = ctx.formatResult(data);
   }
 

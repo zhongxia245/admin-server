@@ -3,6 +3,7 @@
 
 import 'egg';
 import ExportHome from '../../../app/controller/home';
+import ExportProxy from '../../../app/controller/proxy';
 import ExportApiApp from '../../../app/controller/api/app';
 import ExportApiGroup from '../../../app/controller/api/group';
 import ExportApiService from '../../../app/controller/api/service';
@@ -10,6 +11,7 @@ import ExportApiService from '../../../app/controller/api/service';
 declare module 'egg' {
   interface IController {
     home: ExportHome;
+    proxy: ExportProxy;
     api: {
       app: ExportApiApp;
       group: ExportApiGroup;

@@ -8,10 +8,26 @@ import { Service } from 'egg';
  * @extends {Service}
  */
 class EggService extends Service {
-  async get({ perPage = 10, page = 1 }: { perPage: number; page: number }) {
+  async get({
+    name = '',
+    perPage = 10,
+    page = 1,
+  }: {
+    name: string;
+    perPage: number;
+    page: number;
+  }) {
     perPage = Number(perPage);
     page = Number(page);
-    const result = await this.ctx.model.Service.find({})
+
+    let query = {};
+    if (name) {
+      query = {
+        name: new RegExp(name),
+      };
+    }
+
+    const result = await this.ctx.model.Service.find(query)
       .skip((page - 1) * perPage)
       .limit(perPage);
     return result;
