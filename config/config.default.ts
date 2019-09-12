@@ -27,6 +27,21 @@ export default (appInfo: EggAppInfo) => {
     },
   };
 
+  // PM2如何启动： https://eggjs.org/zh-cn/faq.html#%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%9C%89%E9%80%89%E5%9E%8B-pm2
+  // EGGJS 如何修改启动接口: https://github.com/eggjs/egg/issues/2175
+  // 启动接口
+  config.cluster = {
+    listen: {
+      port: 10086,
+    },
+  };
+
+  // 允许跨域访问
+  config.cors = {
+    origin: '*',
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
+  };
+
   // add your special config in here
   const bizConfig = {
     sourceUrl: `https://github.com/eggjs/examples/tree/master/${appInfo.name}`,
