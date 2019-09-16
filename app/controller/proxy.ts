@@ -27,11 +27,18 @@ export default class ProxyController extends Controller {
         // TODO:这里需要判断测试环境还是线上环境 ,通过 env 来判断
         const serviceInfo = await ctx.service.service.getById(appInfo.service);
         const baseUrl = `${serviceInfo.protocol || 'https'}://${serviceInfo.host}`;
+
+        // 用于传递密钥，保证接口可以请求
+        const header: any = {};
+        if (serviceInfo.token) {
+          header.token = serviceInfo.token;
+        }
+
         const result = await axios({
           url: `${baseUrl}${api.path}`,
           method: ctx.request.method as Method,
           data: ctx.request.body,
-          headers: { token: serviceInfo.token }, // 用于传递密钥，保证接口可以请求
+          headers: header,
         }).then(resp => resp.data);
         ctx.body = result;
       } else {
