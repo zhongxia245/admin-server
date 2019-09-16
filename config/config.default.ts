@@ -14,7 +14,7 @@ export default (appInfo: EggAppInfo) => {
    * @see http://mongodb.github.io/node-mongodb-native/2.2/api/Db.html#createCollection
    */
   config.mongoose = {
-    url: process.env.EGG_MONGODB_URL || 'mongodb://127.0.0.1:27017/admin',
+    url: process.env.EGG_MONGODB_URL || 'mongodb://www.izhongxia.com:27017/admin',
     options: {
       server: { poolSize: 20 },
     },

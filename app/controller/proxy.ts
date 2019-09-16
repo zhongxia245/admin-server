@@ -26,20 +26,22 @@ export default class ProxyController extends Controller {
         // 获取服务域名和密钥
         // TODO:这里需要判断测试环境还是线上环境 ,通过 env 来判断
         const serviceInfo = await ctx.service.service.getById(appInfo.service);
-        const baseUrl = `${serviceInfo.protocol || 'https'}://${serviceInfo.host}`;
+        const baseUrl = `${serviceInfo.protocol || 'http'}://${serviceInfo.host}`;
+
+        const options: any = {
+          url: `${baseUrl}${api.path}`,
+          method: (api.method as Method) || 'GET',
+          data: ctx.request.body,
+        };
 
         // 用于传递密钥，保证接口可以请求
-        const header: any = {};
         if (serviceInfo.token) {
-          header.token = serviceInfo.token;
+          options.header = {};
+          options.header.token = serviceInfo.token;
         }
 
-        const result = await axios({
-          url: `${baseUrl}${api.path}`,
-          method: ctx.request.method as Method,
-          data: ctx.request.body,
-          headers: header,
-        }).then(resp => resp.data);
+        const result = await axios(options).then(resp => resp.data);
+
         ctx.body = result;
       } else {
         ctx.body = {
@@ -48,6 +50,7 @@ export default class ProxyController extends Controller {
         };
       }
     } catch (error) {
+      ctx.logger.error(error.message);
       ctx.body = {
         success: false,
         msg: error.message,
