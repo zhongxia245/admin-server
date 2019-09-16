@@ -10,7 +10,7 @@ export default (app: Application) => {
   const apiV1Router: Egg.Router = router.namespace('/api/v1');
 
   // 接口代理
-  apiV1Router.all('/proxy/:service_id/:env/:url', controller.proxy.index);
+  apiV1Router.all('/proxy/:appid/:api_name/:env', controller.proxy.index);
 
   // 应用信息
   apiV1Router.get('/app', api.app.index);
